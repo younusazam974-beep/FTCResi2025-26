@@ -57,7 +57,7 @@ public class BasicRun extends LinearOpMode {
         rightBack = hardwareMap.get(DcMotorEx.class, "rightBackWheel");
         leftFront = hardwareMap.get(DcMotorEx.class, "leftFrontWheel");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFrontWheel");
-        middleWheel = hardwareMap.get(DcMotorEx.class, "middleWheel");
+        
                                       
         leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -69,15 +69,31 @@ public class BasicRun extends LinearOpMode {
         leftFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
         leftBack.setDirection(DcMotorEx.Direction.REVERSE);
         rightBack.setDirection(DcMotorEx.Direction.FORWARD);
         rightFront.setDirection(DcMotorEx.Direction.FORWARD);
         leftFront.setDirection(DcMotorEx.Direction.REVERSE);
 
+        outakeWheelOne = hardwareMap.get(DcMotorEx.class, "outakeWheelOne");
+        outakeWheelOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        outakeWheelOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        outakeWheelOne.setDirection(DcMotorEx.Direction.FORWARD);
 
-        clawRotateServo = hardwareMap.get(CRServo.class, "clawRotateServo");
-        clawRotateServo.setPower(clawRotateServoZeroPower);
+        outakeWheelTwo = hardwareMap.get(DcMotorEx.class, "outakeWheelTwo");
+        outakeWheelTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        outakeWheelTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        outakeWheelTwo.setDirection(DcMotorEx.Direction.FORWARD);
+
+        intakeWheelOne = hardwareMap.get(DcMotorEx.class, "intakeWheelOne");
+        intakeWheelOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intakeWheelOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeWheelOne.setDirection(DcMotorEx.Direction.FORWARD);
+
+        intakeWheelTwo = hardwareMap.get(DcMotorEx.class, "intakeWheelTwo");
+        intakeWheelTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intakeWheelTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeWheelTwo.setDirection(DcMotorEx.Direction.FORWARD);
+
         telemetry.addData("Status:", "Initialized");
         waitForStart();
         runtime.reset();
@@ -87,6 +103,10 @@ public class BasicRun extends LinearOpMode {
             double rightBackVelocity = rightBack.getVelocity();
             double leftFrontVelocity = leftFront.getVelocity();
             double rightFrontVelocity = rightFront.getVelocity();
+            double intakeWheelOneVelocity = intakeWheelOne.getVelocity();
+            double intakeWheelTwoVelocity = intakeWheelTwo.getVelocity();
+            double outakeWheelOneVelocity = outakeWheelOne.getVelocity();
+            double outakeWheelTwoVelocity = outakeWheelTwo.getVelocity();
 
             //Inputs
             double G1LY = -gamepad1.left_stick_y;
@@ -105,12 +125,22 @@ public class BasicRun extends LinearOpMode {
             double backLeftPower = (G1LY - G1LX + G1RX) / denominator;
             double frontRightPower = (G1LY - G1LX - G1RX) / denominator;
             double backRightPower = (G1LY + G1LX - G1RX) / denominator;
+            double intakeWheelOnePower = lTrigger;
+            double intakeWheelTwoPower = lTrigger;
+            double outakeWheelOnePower = rTrigger;
+            double outakeWheelTwoPower = rTrigger;
+            
+            
 
             //Power Setting
             leftBack.setPower(backLeftPower);
             rightBack.setPower(backRightPower);
             leftFront.setPower(frontLeftPower);
             rightFront.setPower(frontRightPower);
+            intakeWheeOne.setPower(intakeWheelOnePower);
+            intakeWheelTwo.setPower(intakeWheelTwoPower);
+            outakeWheelOne.setPower(outakeWheelOnePower);
+            outakeWheelTwo.setPower(outakeWheelTwoPower);
 
             if(gamepad1.x){
                 clawRotateServo.setPosition(0);

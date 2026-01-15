@@ -94,6 +94,7 @@ public class Auto extends LinearOpMode {
         runtime.reset();
 
         moveStraight(0.5, 1);
+        turn(0.5, 2);
 
     }
 }

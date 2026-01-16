@@ -22,10 +22,11 @@ public class BasicRun extends LinearOpMode {
     private DcMotorEx leftFront = null;
     private DcMotorEx rightFront = null;
 
-    private CRServo clawRotateServo = null;
-
-    private double clawRotateServoZeroPower = 0;
-    private double clawRotateServoPower = 1.0;
+    private DcMotorEx intakeWheelOne = null;
+    private DcMotorEx intakeWheelTwo = null;
+    
+    private DcMotorEx outakeWheelOne = null;
+    private DcMotorEx outakeWheelTwo = null;
 
 
 
@@ -97,6 +98,8 @@ public class BasicRun extends LinearOpMode {
         telemetry.addData("Status:", "Initialized");
         waitForStart();
         runtime.reset();
+
+        
         while (opModeIsActive()) {
             // Velocity Vars
             double leftBackVelocity = leftBack.getVelocity();
@@ -130,7 +133,6 @@ public class BasicRun extends LinearOpMode {
             double outakeWheelOnePower = rTrigger;
             double outakeWheelTwoPower = rTrigger;
             
-            
 
             //Power Setting
             leftBack.setPower(backLeftPower);
@@ -141,15 +143,6 @@ public class BasicRun extends LinearOpMode {
             intakeWheelTwo.setPower(intakeWheelTwoPower);
             outakeWheelOne.setPower(outakeWheelOnePower);
             outakeWheelTwo.setPower(outakeWheelTwoPower);
-
-            if(gamepad1.x){
-                clawRotateServo.setPosition(0);
-            }
-            else if (gamepad1.y){
-                clawRotateServo.setPosition(1);
-            }
-
-
 
             //Telemetry Updates
             timeVal.setValue(getRuntime());

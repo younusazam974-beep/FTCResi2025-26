@@ -21,8 +21,12 @@ public class Auto extends LinearOpMode {
 
     private DcMotorEx leftFront = null;
     private DcMotorEx rightFront = null;
-    private CRServo clawLeft = null;
 
+    private DcMotorEx intakeWheelOne = null;
+    private DcMotorEx intakeWheelTwo = null;
+    
+    private DcMotorEx outakeWheelOne = null;
+    private DcMotorEx outakeWheelTwo = null;
 
     public void turn(double pow, int time){
         runtime.reset();
@@ -85,10 +89,25 @@ public class Auto extends LinearOpMode {
         rightFront.setDirection(DcMotorEx.Direction.FORWARD);
         leftFront.setDirection(DcMotorEx.Direction.REVERSE);
 
+        outakeWheelOne = hardwareMap.get(DcMotorEx.class, "outakeWheelOne");
+        outakeWheelOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        outakeWheelOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        outakeWheelOne.setDirection(DcMotorEx.Direction.FORWARD);
 
+        outakeWheelTwo = hardwareMap.get(DcMotorEx.class, "outakeWheelTwo");
+        outakeWheelTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        outakeWheelTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        outakeWheelTwo.setDirection(DcMotorEx.Direction.FORWARD);
 
-        clawLeft = hardwareMap.get(CRServo.class, "clawRotateServo");
-        clawLeft.setDirection(CRServo.Direction.FORWARD);
+        intakeWheelOne = hardwareMap.get(DcMotorEx.class, "intakeWheelOne");
+        intakeWheelOne.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intakeWheelOne.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeWheelOne.setDirection(DcMotorEx.Direction.FORWARD);
+
+        intakeWheelTwo = hardwareMap.get(DcMotorEx.class, "intakeWheelTwo");
+        intakeWheelTwo.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intakeWheelTwo.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        intakeWheelTwo.setDirection(DcMotorEx.Direction.FORWARD);
 
         waitForStart();
         runtime.reset();
